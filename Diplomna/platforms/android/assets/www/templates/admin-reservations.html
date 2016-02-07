@@ -1,0 +1,51 @@
+﻿<ion-view title="Резервации">
+    <ion-header-bar class="bar bar-subheader bar-stable">
+        <div class="animate-show width-height-100">
+            <div class="button-bar">
+                <button class="button" ng-click="openPopover($event)">{{selectedSalon.SalonName}}</button>
+            </div>
+        </div>
+    </ion-header-bar>
+    <ion-tabs class="tabs-striped tabs-background-balanced tabs-color-light" animation="slide-left-right">
+        <ion-tab title="Текущи" on-select="selectedTab(1)">
+        </ion-tab>
+        <ion-tab title="Всички" on-select="selectedTab(2)">
+        </ion-tab>
+    </ion-tabs>
+    <ion-content class="padding has-tabs">
+        <ion-refresher pulling-text="Пуснете, за да презаредите..."
+                       on-refresh="doRefresh()" spinner="android">
+        </ion-refresher>
+        <ion-list>
+            <ion-item ng-repeat="res in reservations" ng-click="openDetailsModal(res.OrderID)"
+                      class="item-text-wrap">
+
+                <h2 class="h2-title">
+                    <i class="icon margin-right-5" ng-class="{true:'admin-res-man ion-male', false:'admin-res-woman ion-female'}[res.Sex == 1]"></i>
+                    {{res.FirstName + ' ' + res.LastName}}
+                </h2>
+                <h3>
+                    <i class="icon ion-android-phone-portrait margin-right-5"></i>
+                    {{res.Phone}}
+                </h3>
+                <div class="reserved-datetime">
+                    <i class="icon ion-ios-calendar margin-right-5"></i><b>{{res.Date | date: 'shortDate'}}</b> <span>{{res.StartTime | limitTo: 5}} - {{res.EndTime | limitTo: 5}}</span>
+                </div>
+                <div class="services-count">
+                    <i class="icon ion-ios-list-outline margin-right-5"></i>
+                    <strong>{{res.ServicesCount}} услуг{{getPlural(res.ServicesCount)}}</strong> <b class="total-label">Общо:</b>
+                    <span class="total-price">{{res.TotalPrice | currency}}</span>
+                </div>
+                <div class="reservation-status">
+                    <i class="icon ion-stats-bars margin-right-5"></i>
+                    <span class="waiting" ng-show="!res.Accepted && !res.Rejected && !res.RejectedByUser">Чака одобрение...</span>
+                    <span class="accepted" ng-show="res.Accepted && !res.Finished && !res.DidntCome">Приета</span>
+                    <span class="rejected" ng-show="res.Rejected">Отказана</span>
+                    <span class="finished" ng-show="res.Accepted && res.Finished">Приключена</span>
+                    <span class="didnt-come" ng-show="res.Accepted && res.DidntCome">Не се яви!</span>
+                    <span class="rejected" ng-show="res.RejectedByUser">Анулирана от клиента</span>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

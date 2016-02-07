@@ -1,0 +1,30 @@
+﻿<ion-view title="Вашите резервации">
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item ng-repeat="res in reservations" ng-click="openDetailsModal(res.OrderID)"
+                      class="item-thumbnail-left item-text-wrap">
+
+                <img ng-src="{{getFullURL(res.ImagePath)}}" class="image-tumb">
+                <h2 class="h2-title">{{res.SalonName}}</h2>
+                <div class="item-address">
+                    гр. {{res.CityName}}<span ng-show="res.NeighbourhoodName">, кв. </span>{{res.NeighbourhoodName}}<span ng-show="res.Street">, ул. </span>{{res.Street}}<span ng-show="res.Number">, № </span>{{res.Number}}<span ng-show="res.Flat">, бл. </span>{{res.Flat}}<span ng-show="res.Entrance">, вх. </span>{{res.Entrance}}<span ng-show="res.Apartment">, ап. </span>{{res.Apartment}}
+                </div>
+                <div class="rating-div">
+                    <div class="star-cont-16">
+                        <div class="current-rating-16" style="width:{{(item.Rating / 5) * 100}}%;"></div>
+                    </div>
+                </div>
+                <div class="reserved-datetime"><b>{{res.Date | date: 'shortDate'}}</b> <span>{{res.StartTime | limitTo: 5}} - {{res.EndTime | limitTo: 5}}</span></div>
+                <div class="services-count"><strong>{{res.ServicesCount}} услуг{{getPlural(res.ServicesCount)}}</strong> <b class="total-label">Общо:</b> <span class="total-price">{{res.TotalPrice | currency}}</span></div>
+                <div class="reservation-status">
+                    <span class="waiting" ng-show="!res.Accepted && !res.Rejected && !res.RejectedByUser">Чака одобрение...</span>
+                    <span class="accepted" ng-show="res.Accepted && !res.Finished && !res.DidntCome">Приета</span>
+                    <span class="rejected" ng-show="res.Rejected">Отказана</span>
+                    <span class="finished" ng-show="res.Accepted && res.Finished">Приключена</span>
+                    <span class="didnt-come" ng-show="res.Accepted && res.DidntCome">Не се яви!</span>
+                    <span class="rejected" ng-show="res.RejectedByUser">Анулирана от клиента</span>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

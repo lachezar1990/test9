@@ -1,0 +1,29 @@
+﻿<ion-modal-view>
+    <ion-header-bar class="bar-calm">
+        <h1 class="title">Добавяне на коментар</h1>
+        <div class="buttons">
+            <button class="button button-clear icon ion-close" ng-click="closeModal()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="padding">
+        <form name="comment_data" ng-submit="commentFormSubmit(comment_data)">
+            <div class="card">
+                <div class="item item-divider">
+                    Вашата оценка
+                </div>
+                <label class="item item-input" ng-show="!authentication.isAuth">
+                    <input type="text" ng-model="addRating.userName" placeholder="Име" />
+                </label>
+                <div class="item item-text-wrap">
+                    <div star-rating rating-value="addRating.rating1" max="5" on-rating-selected="rateFunction(addRating.rating1)" ng-init="addRating.rating1 = star.rating + 5" class="add-comment"></div>
+                    <label class="item item-input">
+                        <textarea ng-model="addRating.comment" placeholder="Добавете вашия коментар..." rows="7"></textarea>
+                    </label>
+                    <button class="button button-block button-calm" ng-disabled="!authentication.isAuth && !addRating.userName">
+                        Добави
+                    </button>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

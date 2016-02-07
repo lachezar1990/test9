@@ -1,0 +1,59 @@
+﻿<ion-side-menus ng-controller="SideMenuCtrl" enable-menu-with-back-views="false">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-calm">
+            <!--<button class="button icon ion-navicon" menu-toggle="left"></button>
+            <ion-nav-back-button class="button-clear"><i class="icon ion-chevron-left"></i> Назад</ion-nav-back-button>-->
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+
+            <ion-nav-buttons side="left">
+                <button class="button icon ion-navicon" menu-toggle="left"></button>
+            </ion-nav-buttons>
+            <ion-nav-buttons side="right">
+                <button class="button icon ion-home button-clear" ui-sref="app.home"></button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left" enable-menu-with-back-views="true">
+        <header class="bar bar-header bar-calm nav-title-slide-ios7" fade-header>
+            <h1 class="title">Меню</h1>
+        </header>
+        <ion-content class="has-header">
+            <ion-list>
+                <ion-item nav-clear menu-close href="#/app/home">
+                    <i class="icon ion-home"></i> Начало
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/login" ng-hide="authentication.isAuth">
+                    Вход
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/register" ng-hide="authentication.isAuth">
+                    Регистрация
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/admin/admin-reservations" ng-show="authentication.isInRole.isSalonAdmin">
+                    Админ
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/reservations" ng-show="authentication.isInRole.isUser">
+                    Резервации
+                    <span class="badge badge-assertive">{{counts.reservationCount}}</span>
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/fav" ng-show="authentication.isAuth">
+                    Любими
+                    <span class="badge badge-assertive">{{counts.favCount}}</span>
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/change" ng-show="authentication.isAuth">
+                    Смяна на парола
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/conditions">
+                    Общи условия
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/forus">
+                    За нас
+                </ion-item>
+                <ion-item nav-clear menu-close href="#" ng-show="authentication.isAuth" ng-click="logOut()">
+                    Изход
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

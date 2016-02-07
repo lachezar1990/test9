@@ -1,0 +1,43 @@
+﻿<ion-modal-view ng-controller="ServicesPageCtrl">
+    <ion-header-bar class="bar-calm">
+        <h1 class="title">Коментари</h1>
+        <div class="buttons">
+            <button class="button button-clear icon ion-close" ng-click="closeModal()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="padding">
+        <ion-list class="card services-modal">
+            <li class="item item-text-wrap">
+                <h4>
+                    Подходящи за: <i class="icon ion-female female"></i> - жена
+                    <i class="icon ion-male male"></i> - мъж
+                    <i class="icon ion-social-reddit-outline kids"></i> - деца
+                </h4>
+            </li>
+            <ion-item class="item item-text-wrap item-avatar" ng-repeat="service in services">
+                <img ng-src="{{getFullURLServ(service.ImageUrl) + '?w=40&h=40&mode=max'}}" alt="{{service.ServiceName}}">
+                <h2>{{ service.ServiceName }}</h2>
+                <h4>{{ service.TypeName }}</h4>
+                <p class="service-description">
+                    {{ service.Description }}
+                </p>
+                <div>
+                    <div class="service-price-div">
+                        <i class="icon ion-social-euro"></i>
+                        <span class="service-price">{{ service.Price | currency }}</span>
+                    </div>
+                    <div class="service-time-div">
+                        <i class="icon ion-ios-clock-outline"></i>
+                        <span class="service-time">{{ service.Time | limitTo: 5 }}</span>
+                    </div>
+                    <b>
+                        <i class="icon ion-female" style="color: deeppink;" ng-show="service.Women"></i>
+                        <i class="icon ion-male" style="color: dodgerblue;" ng-show="service.Men"></i>
+                        <i class="icon ion-social-reddit-outline" style="color: darkgreen;" ng-show="service.Kids"></i>
+                    </b>
+                </div>
+
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-modal-view>

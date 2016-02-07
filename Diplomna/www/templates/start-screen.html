@@ -1,0 +1,34 @@
+﻿<ion-view title="Запази ми">
+    <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="true">
+        <ion-slide>
+            <div class="steps first-step">
+                <img class="center-image" src="images/scissors_hair.png" alt="ножици" />
+                <h2>Салони</h2>
+                <h4>Множество салони из цялата страна!</h4>
+                <button class="button button-clear button-light skip-button" ng-click="goHome()">
+                    Прескочи
+                </button>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="steps second-step">
+                <img class="center-image" src="images/scissors-147233_640.png" alt="ножици" />
+                <h2>Само за 1 минута!</h2>
+                <h4>Резервацията никога не е била толкова лесна!</h4>
+                <button class="button button-clear button-light skip-button" ng-click="goHome()">
+                    Прескочи
+                </button>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="steps third-step">
+                <img class="center-image" src="images/empower-your-business.png" alt="ножици" />
+                <h2>За вас собственици!</h2>
+                <h4>Развийте своя фризьорски салон!</h4>
+                <button class="button button-clear button-light skip-button" ng-click="goHome()">
+                    Край
+                </button>
+            </div>
+        </ion-slide>
+    </ion-slide-box>
+</ion-view>

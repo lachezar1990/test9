@@ -1,0 +1,50 @@
+﻿<form name="datetime_data" novalidate class="css-form" ng-submit="datetimeFormSubmit(datetime_data, datetime)">
+    <div class="list list-inset">
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : !datetime_data.date.$valid && !datetime_data.date.$pristine }">
+            <span class="input-label">Въведете дата</span>
+            <input type="date" ng-model="datetime.date" name="date" max="{{maxDateValue}}" min="{{minDateValue}}" required />
+        </label>
+        <div class="form-errors" ng-show="!datetime_data.date.$valid && !datetime_data.date.$pristine"
+             ng-messages="datetime_data.date.$error" ng-messages-include="templates/form-errors-personal-data.html">
+            <div class="form-error" ng-message="min">
+                Моля, въведете валидна дата!
+                Трябва да бъде от {{minDateValue}} до {{maxDateValue}}
+            </div>
+            <div class="form-error" ng-message="max">
+                Моля, въведете валидна дата!
+                Трябва да бъде от {{minDateValue}} до {{maxDateValue}}
+            </div>
+            <div class="form-error" ng-message="date">
+                Моля, въведете валидна дата!
+                Трябва да бъде от {{minDateValue}} до {{maxDateValue}}
+            </div>
+        </div>
+        <div class="item item-button-right item-button-right-bottom" ng-show="datetime.date && !datetime.dontCare">
+            <span class="item-stacked-label-mine">Изберете служител/ка</span>
+            {{selectedEmpl.FullName || 'Свободен служител'}}
+            <div class="button" ng-click="openPopover($event)">
+                <i class="icon ion-ios-search-strong"></i>
+            </div>
+        </div>
+        <div class="item item-toggle" ng-show="datetime.date">
+            Нямам предпочитания
+            <label class="toggle toggle-assertive">
+                <input type="checkbox" ng-model="datetime.dontCare">
+                <div class="track">
+                    <div class="handle"></div>
+                </div>
+            </label>
+        </div>
+        <div class="item item-button-right item-button-right-bottom" ng-show="datetime.date && (datetime.dontCare || selectedEmpl)">
+            <span class="item-stacked-label-mine">Изберете час за процедурата</span>
+            {{(selectedTime.StartTime | limitTo:5) + ' - ' + (selectedTime.EndTime | limitTo:5)}}
+            <div class="button" ng-click="openModal()">
+                <i class="icon ion-ios-clock-outline"></i>
+            </div>
+        </div>
+
+    </div>
+    <button type="submit" class="button button-block button-calm">
+        Продължи
+    </button>
+</form>

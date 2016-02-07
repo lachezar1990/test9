@@ -1,0 +1,28 @@
+﻿<ion-view title="Вход">
+    <ion-content>
+        <h2 class="h2-login">
+            Вход
+        </h2>
+        <form name="login_data" novalidate class="css-form" ng-submit="loginFormSubmit(login_data, cred)">
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input type="email" placeholder="Е-mail" maxlength="256" required ng-model="cred.userName">
+                </label>
+                <label class="item item-input">
+                    <input type="password" placeholder="Парола" maxlength="256" required ng-model="cred.password">
+                </label>
+                <div ng-show="message" style="color: red;">
+                    {{message}}
+                </div>
+                <button class="button button-block button-calm" ng-disabled="login_data.$invalid">
+                    Вход
+                </button>
+                <div class="register-login">
+                    <button class="button button-clear button-calm" ui-sref="app.register">
+                        Нямате регистрация?
+                    </button>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

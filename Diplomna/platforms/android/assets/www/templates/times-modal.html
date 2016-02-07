@@ -1,0 +1,20 @@
+﻿<ion-modal-view>
+    <ion-header-bar class="bar-calm">
+        <h1 class="title">Избор на час за процедура</h1>
+        <div class="buttons">
+            <button class="button button-clear icon ion-close" ng-click="closeModal()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="padding">
+        <div class="list" ng-show="showHours">
+            <a class="item item-icon-left" href="#" ng-repeat="time in times.times" ng-click="selectTime(time)"
+               ng-class="{ 'selectedTime' : (time.StartTime == selectedTime.StartTime) && (time.EndTime == selectedTime.EndTime) }">
+                <i class="icon"
+                   ng-class="(time.StartTime == selectedTime.StartTime) && (time.EndTime == selectedTime.EndTime) ? 'ion-checkmark-circled' : 'ion-ios-clock-outline'"></i>
+                {{time.StartTime | limitTo:5}} - {{time.EndTime | limitTo:5}}
+            </a>
+
+        </div>
+
+    </ion-content>
+</ion-modal-view>

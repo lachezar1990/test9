@@ -1,0 +1,43 @@
+﻿<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-balanced">
+            <!--<button class="button icon ion-navicon" menu-toggle="left"></button>
+            <ion-nav-back-button class="button-clear"><i class="icon ion-chevron-left"></i> Назад</ion-nav-back-button>-->
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+
+            <ion-nav-buttons side="left">
+                <button class="button icon ion-navicon" menu-toggle="left"></button>
+            </ion-nav-buttons>
+            <ion-nav-buttons side="right">
+                <button class="button icon ion-home button-clear" ui-sref="app.home"></button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="adminContent" animation="slide-left-right"></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left" enable-menu-with-back-views="true">
+        <header class="bar bar-header bar-balanced nav-title-slide-ios7" fade-header>
+            <h1 class="title">Меню</h1>
+        </header>
+        <ion-content class="has-header">
+            <ion-list>
+                <ion-item nav-clear menu-close href="#/app/home">
+                    <i class="icon ion-home"></i> Начало
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/admin/admin-reservations">
+                    Резервации
+                    <span class="badge badge-assertive">{{reservationCount}}</span>
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/conditions">
+                    Общи условия
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/forus">
+                    За нас
+                </ion-item>
+                <ion-item nav-clear menu-close href="#" ng-click="logOut()">
+                    Изход
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

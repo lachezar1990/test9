@@ -1,0 +1,17 @@
+﻿<ion-popover-view class="platform-ios" style="width: 80%;">
+    <ion-content>
+        <div class="list">
+            <a class="item item-avatar item-checkbox" ng-repeat="empl in employees" ng-click="EmplClick(empl)">
+                <img ng-src="{{getFullURLEmpl(empl.ImageUrl) + '?w=40&h=40&mode=max'}}" style="border-radius:15%;" />
+                <h2>{{empl.FullName}}</h2>
+                <p>{{empl.PositionName}}</p>
+            </a>
+            <div class="item">
+                <button class="button button-block button-assertive" ng-click="EmplEmptyClick()">
+                    Изчисти служителя
+                </button>
+            </div>
+        </div>
+        
+    </ion-content>
+</ion-popover-view>

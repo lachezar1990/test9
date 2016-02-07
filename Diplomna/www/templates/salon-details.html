@@ -1,0 +1,89 @@
+﻿<ion-view title="{{salon.SalonName}}">
+    <ion-nav-title>
+        {{salon.SalonName}}
+    </ion-nav-title>
+    <ion-content has-header="true" class="padding" drag-content="false">
+        <div class="row">
+            <div class="col col-33 details-pic" id="title-pic">
+                <img ng-src="{{getFullURL(salon.ImagePath)}}" alt="{{salon.SalonName}}" class="salon-image" /> <!-- document.getElementById('foo').offsetWidth -->
+                <img src="images/icons/star-16.png" alt="star" ng-show="salon.Favourite" class="fav-star-icon" />
+            </div>
+            <div class="col col-67">
+                <h3>{{salon.SalonName}}</h3>
+                <div class="rating-container">
+                    <div class="star-cont">
+                        <div class="current-rating" style="width:{{(salon.Rating / 5) * 100}}%;"></div>
+                    </div>
+                    <div class="total-ppl">
+                        <span class="badge badge-energized"><i class="icon ion-person-stalker"></i> {{commentsCount}}</span>
+                    </div>
+                </div>
+                <div class="fav-div-det" ng-show="!salon.Favourite && authentication.isAuth">
+                    <button class="button button-small icon-left ion-android-star button-energized" ng-click="addFavourite()">
+                        Добави в любими
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="list card">
+            <a href="#" class="item item-icon-left item-text-wrap text-center">
+                <i class="icon ion-ios7-telephone"></i>
+                {{salon.Phones}}
+            </a>
+            <a href="mailto:{{salon.Emails}}" class="item item-icon-left item-text-wrap text-center">
+                <i class="icon ion-ios-email-outline"></i>
+                {{salon.Emails}}
+            </a>
+            <a href="#" ng-show="salon.SiteUrl" class="item item-icon-left item-text-wrap text-center" ng-click="openLink(salon.SiteUrl)">
+                <i class="icon ion-earth"></i>
+                {{salon.SiteUrl}}
+            </a>
+            <a href="#" class="item item-icon-left item-text-wrap text-center">
+                <i class="icon ion-clock"></i>
+                <div ng-repeat="time in workingTime">
+                    {{time}};
+                </div>
+            </a>
+            <div href="#" class="item item-icon-left item-button-right text-center">
+                <i class="icon ion-scissors"></i>
+                Предлагани услуги
+                <span class="badge badge-assertive">{{salon.ServicesCount}}</span>
+                <button class="button button-icon services-look" ng-click="openModal('templates/services-modal.html')">
+                    <i class="icon ion-ios-eye"></i>
+                </button>
+            </div>
+        </div>
+        <ion-scroll direction="x" class="images-scroll">
+            <img ng-repeat="image in salon.Images" class="image-scroll-img" ng-click="showImages($index)" ng-src="{{getFullURL(image.ImagePath) + '?w=100&h=100&mode=max'}}" alt="{{image.ImageName}}" />
+        </ion-scroll>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <p>{{salon.Description}}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-button-right item-divider">
+                Отзиви<span class="badge badge-assertive comments-count-details">{{commentsCount}}</span>
+                <a class="add-comment-button" ng-click="openModal('templates/add-comment.html')" ng-show="addCommentButtonVisible">Добави</a>
+            </div>
+            <div class="item item-text-wrap">
+                <div ng-repeat="com in salon.Comments | limitTo: 3">
+                    <div class="comment-title-cont"><span class="comment-name">{{com.CreateBy}}</span> - <span class="comment-time">{{com.AddedOn | date:'d.M.yyyy HH:mm'}}</span></div>
+                    <div class="star-cont-10">
+                        <div class="current-rating-10" style="width:{{(com.Rating1 / 5) * 100}}%;"></div>
+                    </div>
+                    <div class="comment-text">{{com.Comment}}</div>
+
+                    <hr />
+                </div>
+                <button class="button button-block button-small button-stable" ng-click="openModal('templates/comments.html')">
+                    Виж всички
+                </button>
+            </div>
+
+        </div>
+    </ion-content>
+    <ion-footer-bar class="button-footer bar-calm">
+        <a class="whole-button" ui-sref="app.tabs({ salonId: salon.SalonID })" ng-click="reserveClick()">Запази ми</a>
+    </ion-footer-bar>
+</ion-view>

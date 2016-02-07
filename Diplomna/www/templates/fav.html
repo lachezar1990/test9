@@ -1,0 +1,29 @@
+﻿<ion-view title="Любими салони">
+    <ion-content has-header="true" class="padding">
+        <ion-list>
+            <ion-item ng-repeat="item in favourites" href="#/app/salon/{{item.SalonID}}"
+                      class="item-thumbnail-left item-text-wrap" on-hold="show({{item}}, $index)" item-height="100px">
+                <img ng-src="{{getFullURL(item.ImagePath) + '?w=80&h=80&mode=max'}}" class="image-tumb">
+                <h2 class="h2-title">{{item.SalonName | limitTo: 40}}{{item.SalonName.length > 40 ? '...' : ''}}</h2>
+                <div class="item-address">
+                    гр. {{item.City}}<span ng-show="item.Neighbourhood">, кв. </span>{{item.Neighbourhood}}<span ng-show="item.Street">, ул. </span>{{item.Street}}<span ng-show="item.Number">, № </span>{{item.Number}}<span ng-show="item.Flat">, бл. </span>{{item.Flat}}<span ng-show="item.Entrance">, вх. </span>{{item.Entrance}}<span ng-show="item.Apartment">, ап. </span>{{item.Apartment}}
+                </div>
+                <div class="rating-div">
+                    <div class="star-cont-16">
+                        <div class="current-rating-16" style="width:{{(item.Rating / 5) * 100}}%;"></div>
+                    </div>
+                    <div class="comments-count">
+                        <span class="badge badge-energized badge-my-item">
+                            <i class="icon ion-person-stalker"></i> {{ item.CommentsCount }}
+                        </span>
+                    </div>
+                </div>
+                <i class="ion-android-star favourite-star" ng-show="item.Favourite"></i>
+            </ion-item>
+            <ion-item class="item-icon-left item-text-wrap" ng-hide="favourites.length">
+                <i class="icon ion-search"></i>
+                Нямате любими салони!
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

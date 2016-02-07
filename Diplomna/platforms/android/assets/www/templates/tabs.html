@@ -1,0 +1,56 @@
+﻿<ion-view title="{{ tabsTitle }}">
+    <ion-tabs class="tabs-striped tabs-background-calm tabs-color-light" animation="slide-left-right">
+
+        <ion-tab title="Home" on-select="onTabSelected('Лични данни')"
+                 icon="ion-android-person" badge="((currentStep > 1 && '\u2713') || '')" badge-style="badge-balanced my-tab-badge">
+            <!-- Tab 1 content -->
+            <ion-view>
+                <ion-content padding="true" class="has-custom-h">
+                    <div ng-include="'templates/Tabs/first-step.html'"></div>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+
+        <ion-tab title="Услуга" on-select="onTabSelected('Услуги')" disabled="currentStep < 2"
+                 icon="ion-scissors" badge="((currentStep > 2 && '\u2713') || '')" badge-style="badge-balanced my-tab-badge">
+            <!-- Tab 2 content -->
+            <ion-view>
+                <ion-content padding="true" style="bottom:87px !important;" class="has-custom-h">
+                    <div ng-include="'templates/Tabs/second-step.html'"></div>
+                </ion-content>
+                <ion-footer-bar class="bar-subfooter bar-energized bar-subf-service">
+                    <div class="row padding-0">
+                        <div class="col">
+                            <i class="ion-ios-clock-outline"></i>
+                            <span class="services-res-totals">{{totalPrice | currency}}</span>
+                        </div>
+                        <div class="col">
+                            <i class="ion-ios-clock-outline"></i>
+                            <span class="services-res-totals">{{totalTime}}</span>
+                        </div>
+                    </div>
+                </ion-footer-bar>
+            </ion-view>
+        </ion-tab>
+
+        <ion-tab title="About" on-select="onTabSelected('Дата и час')" disabled="currentStep < 3"
+                 icon="ion-ios-calendar" badge="((currentStep > 3 && '\u2713') || '')" badge-style="badge-balanced my-tab-badge">
+            <!-- Tab 3 content -->
+            <ion-view>
+                <ion-content padding="true" class="has-custom-h">
+                    <div ng-include="'templates/Tabs/third-step.html'"></div>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+
+        <ion-tab title="Settings" icon="ion-clipboard" on-select="onTabSelected('Обобщение')" disabled="currentStep < 4">
+            <!-- Tab 4 content -->
+            <ion-view>
+                <ion-content padding="true">
+                    <div ng-include="'templates/Tabs/fourth-step.html'"></div>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+
+    </ion-tabs>
+</ion-view>

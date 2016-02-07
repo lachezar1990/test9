@@ -1,0 +1,63 @@
+﻿<ion-view title="Запази ми">
+    <ion-nav-buttons side="right">
+        <button class="button icon ion-search button-clear" ng-click="ShowSearchInput()" ng-hide="isSearchActive"></button>
+        <button class="button icon ion-close button-clear" ng-click="HideSearchInput()" ng-show="isSearchActive"></button>
+    </ion-nav-buttons>
+    <ion-header-bar class="bar bar-subheader bar-stable">
+        <div ng-hide="isSearchActive" class="animate-show width-height-100">
+            <table>
+                <tr>
+                    <td style="width: 100%;">
+                        <div class="button-bar">
+                            <button class="button" ng-click="openPopover($event)" ng-class="{ 'right-border' : !hasNeighbourhoods }">{{cityButtonText}}</button>
+                            <button class="button" ng-click="openNeighbourhoodPopover($event)" ng-show="hasNeighbourhoods">{{neighbourhoodButtonText}}</button>
+                        </div>
+                    </td>
+                    <td style="vertical-align: top;">
+                        <div>
+                            <button class="button icon ion-search" style="height: 34px;" ng-click="searchFromCity()" id="searchFromCityBtn"></button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div ng-show="isSearchActive" class="animate-show row padding-0">
+            <!--<div class="col col-75 col-90plus padding-0"><input type="search" class="search-input padding-0" results placeholder="Въведете фраза" /></div>
+            <div class="col padding-0"><button class="button icon ion-search button-clear"></button></div>-->
+            <label class="item-input-wrapper">
+                <i class="icon ion-ios7-search placeholder-icon"></i>
+                <input type="search" class="search-input" placeholder="Въведете" ng-model="searchText">
+            </label>
+            <button class="button button-clear icon ion-close" ng-click="searchText = ''"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="padding has-subheader">
+        <ion-list>
+            <ion-item ng-repeat="item in salons | filter:searchText track by item.SalonID" href="#/app/salon/{{item.SalonID}}"
+                      class="item-thumbnail-left item-text-wrap" on-hold="show({{item}})">
+                <img ng-src="{{getFullURL(item.ImagePath) + '?w=80&h=80&mode=max'}}" class="image-tumb">
+                <h2 class="h2-title">{{item.SalonName | limitTo: 40}}{{item.SalonName.length > 40 ? '...' : ''}}</h2>
+                <div class="item-address">
+                    гр. {{item.City}}<span ng-show="item.Neighbourhood">, кв. </span>{{item.Neighbourhood}}<span ng-show="item.Street">, ул. </span>{{item.Street}}<span ng-show="item.Number">, № </span>{{item.Number}}<span ng-show="item.Flat">, бл. </span>{{item.Flat}}<span ng-show="item.Entrance">, вх. </span>{{item.Entrance}}<span ng-show="item.Apartment">, ап. </span>{{item.Apartment}}
+                </div>
+                <div class="rating-div">
+                    <div class="star-cont-16">
+                        <div class="current-rating-16" style="width:{{(item.Rating / 5) * 100}}%;"></div>
+                    </div>
+                    <div class="comments-count">
+                        <span class="badge badge-energized badge-my-item">
+                            <i class="icon ion-person-stalker"></i> {{ item.CommentsCount }}
+                        </span>
+                    </div>
+                </div>
+                <i class="ion-android-star favourite-star" ng-show="item.Favourite"></i>
+            </ion-item>
+            <ion-item class="item-icon-left item-text-wrap" ng-hide="(salons | filter:searchText).length">
+                <i class="icon ion-search"></i>
+                Няма салони съответстващи на вашето търсене!
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll immediate-check="false" on-infinite="loadMoreSalons()" spinner="android" ng-if="hasMore">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

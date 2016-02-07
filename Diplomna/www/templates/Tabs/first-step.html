@@ -1,0 +1,69 @@
+﻿<form name="personal_data" novalidate class="css-form" ng-submit="personalFormSubmit(personal_data, new)">
+    <div class="list">
+        <label class="item item-input item-stacked-label"
+               ng-class="{ 'has-error' : personal_data.firstname.$invalid && (!personal_data.firstname.$pristine || submitted) }">
+            <!--  && !personal_data.firstname.$pristine -->
+            <span class="input-label">Име</span>
+            <input type="text" name="firstname" placeholder="Име" ng-model-options="{ updateOn: 'blur' }"
+                   ng-minlength="2" ng-maxlength="50" required ng-model="new.firstname">
+        </label>
+
+        <div class="form-errors" ng-show="personal_data.firstname.$error && (!personal_data.firstname.$pristine || submitted)"
+             ng-messages="personal_data.firstname.$error" ng-messages-include="templates/form-errors-personal-data.html">
+        </div>
+
+        <label class="item item-input item-stacked-label"
+               ng-class="{ 'has-error' : personal_data.lastname.$invalid && (!personal_data.lastname.$pristine || submitted) }">
+            <span class="input-label">Фамилия</span>
+            <input type="text" name="lastname" ng-minlength="2" ng-model-options="{ updateOn: 'blur' }"
+                   ng-maxlength="50" placeholder="Фамилия" required ng-model="new.lastname">
+        </label>
+
+        <div class="form-errors" ng-show="personal_data.lastname.$error && (!personal_data.lastname.$pristine || submitted)" ng-messages="personal_data.lastname.$error" ng-messages-include="templates/form-errors-personal-data.html">
+        </div>
+
+        <label class="item item-input item-stacked-label"
+               ng-class="{ 'has-error' : personal_data.phone.$invalid && (!personal_data.phone.$pristine || submitted) }">
+            <span class="input-label">Телефон за връзка</span>
+            <input type="text" name="phone" ng-minlength="5" ng-maxlength="20"
+                   placeholder="Телефон за връзка" required ng-model="new.phone">
+        </label>
+        <div class="form-errors" ng-show="personal_data.phone.$error && (!personal_data.phone.$pristine || submitted)"
+             ng-messages="personal_data.phone.$error" ng-messages-include="templates/form-errors-personal-data.html">
+            <div class="form-error" ng-message="minlength">Полето трябва да съдържа най-малко 5 символа.</div>
+            <div class="form-error" ng-message="maxlength">Полето трябва да съдържа най-много 20 символа.</div>
+        </div>
+
+        <label class="item item-input item-stacked-label"
+               ng-class="{ 'has-error' : personal_data.moreInfo.$invalid && (!personal_data.moreInfo.$pristine || submitted) }">
+            <span class="input-label">Допълнителна информация</span>
+            <textarea name="moreInfo" rows="2" ng-maxlength="200" ng-model-options="{ updateOn: 'blur' }"
+                      placeholder="Допълнителна информация - незадължително" ng-model="new.moreInfo"></textarea>
+        </label>
+
+        <div class="form-errors" ng-show="personal_data.moreInfo.$error && (!personal_data.moreInfo.$pristine || submitted)"
+             ng-messages="personal_data.moreInfo.$error" ng-messages-include="templates/form-errors-personal-data.html">
+            <div class="form-error" ng-message="maxlength">Полето трябва да съдържа най-много 200 символа.</div>
+        </div>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col">
+                <ion-radio name="sex_male" ng-model="new.sex" ng-value="1" class="radio-step1" required>
+                    Мъж
+                </ion-radio>
+            </div>
+            <div class="col">
+                <ion-radio name="sex_female" ng-model="new.sex" ng-value="2" class="radio-step1" required>
+                    Жена
+                </ion-radio>
+            </div>
+        </div>
+    </div>
+    <div class="form-error" ng-show="(!new.sex && submitted)">
+        Моля въведете пол.
+    </div>
+    <button type="submit" class="button button-block button-calm">
+        Продължи
+    </button>
+</form>

@@ -1,0 +1,101 @@
+﻿<ion-modal-view>
+    <ion-header-bar class="bar-balanced">
+        <h1 class="title">Резервация №{{reservation.OrderID}}</h1>
+        <div class="buttons">
+            <button class="button button-clear icon ion-close" ng-click="closeModal()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="padding">
+        <div class="list card" style="margin-top: 10px;">
+            <div class="item item-divider">
+                <div class="reservation-status">
+                    <span class="waiting" ng-show="!reservation.Accepted && !reservation.Rejected && !reservation.RejectedByUser">Чака одобрение...</span>
+                    <span class="accepted" ng-show="reservation.Accepted && !reservation.Finished && !reservation.DidntCome">Приета</span>
+                    <span class="rejected" ng-show="reservation.Rejected">Отказана</span>
+                    <span class="finished" ng-show="reservation.Accepted && reservation.Finished">Приключена</span>
+                    <span class="didnt-come" ng-show="reservation.Accepted && reservation.DidntCome">Не се яви!</span>
+                    <span class="rejected" ng-show="reservation.RejectedByUser">Анулирана от клиента</span>
+                </div>
+            </div>
+            <a href="#" class="item item-icon-left item-text-wrap text-center">
+                <i class="icon" ng-class="{true:'admin-res-man ion-male', false:'admin-res-woman ion-female'}[reservation.Sex == 1]"></i>
+                {{reservation.FirstName + ' ' + reservation.LastName}}
+            </a>
+            <a href="#" class="item item-icon-left item-text-wrap text-center" ng-click="call(reservation.Phone);">
+                <i class="icon ion-ios-telephone"></i>
+                {{reservation.Phone}}
+            </a>
+            <div class="item item-body">
+                <table class="resume-table">
+                    <tr>
+                        <td style="width: 100px;">
+                            Дата и час:
+                        </td>
+                        <td>
+                            {{reservation.Date | date: 'shortDate'}}
+                            <b>{{(reservation.StartTime | limitTo:5) + ' - ' + (reservation.EndTime | limitTo:5)}}</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">Доп. инф.:</td>
+                        <td>
+                            {{reservation.MoreInfo}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table style="width: 100%;">
+                                <tr class="no-border">
+                                    <td class="text-left">
+                                        <b>Услуги</b>
+                                    </td>
+                                </tr>
+                                <tr class="no-border" ng-repeat="service in services">
+                                    <td style="width:70%;">
+                                        <span class="resume-table-services">
+                                            {{service.ServiceName}}<br />
+                                            <span ng-show="!service.DontCare">{{service.EmployeeName}}</span>
+                                            <span ng-show="service.DontCare">няма предпочитания</span>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="resume-table-services services-prices">
+                                            {{ service.Price | currency }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            Общо
+                        </td>
+                        <td>
+                            {{ reservation.TotalPrice | currency }}
+                            <img src="images/total_underline.png" alt="Черта" class="total-underline" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="item" ng-show="!reservation.Finished && !reservation.DidntCome && !reservation.RejectedByUser && !reservation.Rejected">
+                <button type="button" ng-show="!reservation.Accepted && !reservation.Rejected && !reservation.Finished && !reservation.DidntCome && !reservation.RejectedByUser"
+                        class="button button-block button-balanced icon-left ion-checkmark-round" ng-click="acceptRes(reservation.UniqueID)">
+                    Потвърди
+                </button>
+                <button type="button" ng-show="!reservation.Accepted && !reservation.Rejected"
+                        class="button button-block button-assertive icon-left ion-close-round" ng-click="rejectRes(reservation.UniqueID)">
+                    Откажи
+                </button>
+                <button type="button" class="button button-block button-balanced icon-left ion-checkmark-round" ng-click="finished(reservation.UniqueID)" ng-show="reservation.Accepted && !reservation.Rejected && !reservation.Finished && !reservation.DidntCome && !reservation.RejectedByUser">
+                    Приключена
+                </button>
+                <button type="button" class="button button-block button-assertive icon-left ion-close-round" ng-click="didntCome(reservation.UniqueID)" ng-show="reservation.Accepted && !reservation.Rejected && !reservation.Finished && !reservation.DidntCome && !reservation.RejectedByUser">
+                    Не се явил
+                </button>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-modal-view>

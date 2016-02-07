@@ -1,0 +1,20 @@
+﻿<ion-modal-view>
+    <ion-header-bar class="bar-calm">
+        <h1 class="title">Коментари</h1>
+        <div class="buttons">
+            <button class="button button-clear icon ion-close" ng-click="closeModal()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="padding">
+            <ion-list>
+                <ion-item class="item-text-wrap" ng-repeat="com in salon.Comments">
+                     <div class="comment-title-cont"><span class="comment-name">{{com.CreateBy}}</span> - <span class="comment-time">{{com.AddedOn | date:'d.M.yyyy HH:mm'}}</span></div>
+                        <div class="star-cont-10">
+                            <div class="current-rating-10" style="width:{{(com.Rating1 / 5) * 100}}%;"></div>
+                        </div>
+                        <div class="comment-text">{{com.Comment}}</div>
+
+                </ion-item>
+            </ion-list>
+    </ion-content>
+</ion-modal-view>

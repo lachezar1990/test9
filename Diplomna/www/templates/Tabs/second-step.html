@@ -1,0 +1,40 @@
+﻿<ion-list class="services-modal">
+    <li class="item item-text-wrap">
+        <h4>
+            Подходящи за: <i class="ion-female female"></i> - жена
+            <i class="ion-male male"></i> - мъж
+            <i class="ion-social-reddit-outline kids"></i> - деца
+        </h4>
+    </li>
+    <ion-item class="item-toggle item-text-wrap item-avatar item-toggle-small-padding" ng-repeat="service in services">
+        <img ng-src="{{getFullURLServ(service.ImageUrl) + '?w=40&h=40&mode=max'}}" alt="{{service.ServiceName}}">
+        <h2>{{ service.ServiceName }}</h2>
+        <h4>{{ service.TypeName }}</h4>
+        <p class="service-description">
+            {{ service.Description }}
+        </p>
+        <div>
+            <div class="service-price-div">
+                <i class="icon ion-social-euro"></i>
+                <span class="service-price">{{ service.Price | currency }}</span>
+            </div>
+            <div>
+                <i class="icon ion-ios-clock-outline"></i>
+                <span class="service-time">{{ service.Time | limitTo: 5 }}</span>
+            </div>
+            <b>
+                <i class="icon ion-female" style="color: deeppink;" ng-show="service.Women"></i>
+                <i class="icon ion-male" style="color: dodgerblue;" ng-show="service.Men"></i>
+                <i class="icon ion-social-reddit-outline" style="color: darkgreen;" ng-show="service.Kids"></i>
+            </b>
+        </div>
+        <label class="toggle toggle-balanced item-toggle-center">
+            <input type="checkbox" ng-model="service.checked" ng-checked="service.checked" ng-click="toggleChange()">
+            <div class="track">
+                <div class="handle"></div>
+            </div>
+        </label>
+    </ion-item>
+
+</ion-list>
+<button class="button button-block button-calm" ng-click="servicesFormSubmit()">Продължи</button>

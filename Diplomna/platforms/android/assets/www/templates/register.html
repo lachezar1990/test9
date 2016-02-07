@@ -1,0 +1,27 @@
+﻿<ion-view title="Регистрация">
+    <ion-content>
+        <h2 class="h2-login">
+            Регистрация
+        </h2>
+        <form name="register_data" novalidate class="css-form" ng-submit="registerFormSubmit(register_data, registration)">
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input type="email" placeholder="Е-mail" maxlength="256" required ng-model="registration.username">
+                </label>
+                <label class="item item-input">
+                    <input type="password" placeholder="Парола" maxlength="256" required ng-model="registration.password">
+                </label>
+                <label class="item item-input">
+                    <input type="password" placeholder="Повторете паролата" maxlength="256" required ng-model="registration.confirmPassword">
+                </label>
+                <div ng-show="message" style="color: red;">
+                    {{message}}
+                </div>
+                <button class="button button-block button-calm" ng-disabled="register_data.$invalid">
+                    Регистрация
+                </button>
+
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

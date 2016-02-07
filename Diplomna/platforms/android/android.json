@@ -1,0 +1,129 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "res/xml/config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Calendar\"><param name=\"android-package\" value=\"nl.xservices.plugins.Calendar\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Globalization\"><param name=\"android-package\" value=\"org.apache.cordova.globalization.Globalization\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_CALENDAR\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_CALENDAR\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "cordova-plugin-calendar": {
+            "PACKAGE_NAME": "io.cordova.Diplomna"
+        },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "io.cordova.Diplomna"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "io.cordova.Diplomna"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "io.cordova.Diplomna"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "io.cordova.Diplomna"
+        }
+    },
+    "dependent_plugins": {},
+    "modules": [
+        {
+            "file": "plugins/cordova-plugin-calendar/www/Calendar.js",
+            "id": "cordova-plugin-calendar.Calendar",
+            "clobbers": [
+                "Calendar"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-calendar/test/tests.js",
+            "id": "cordova-plugin-calendar.tests"
+        },
+        {
+            "file": "plugins/cordova-plugin-globalization/www/GlobalizationError.js",
+            "id": "cordova-plugin-globalization.GlobalizationError",
+            "clobbers": [
+                "window.GlobalizationError"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-globalization/www/globalization.js",
+            "id": "cordova-plugin-globalization.globalization",
+            "clobbers": [
+                "navigator.globalization"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+            "id": "cordova-plugin-inappbrowser.inappbrowser",
+            "clobbers": [
+                "cordova.InAppBrowser.open",
+                "window.open"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-network-information/www/network.js",
+            "id": "cordova-plugin-network-information.network",
+            "clobbers": [
+                "navigator.connection",
+                "navigator.network.connection"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-network-information/www/Connection.js",
+            "id": "cordova-plugin-network-information.Connection",
+            "clobbers": [
+                "Connection"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-whitelist/whitelist.js",
+            "id": "cordova-plugin-whitelist.whitelist",
+            "runs": true
+        }
+    ]
+}
